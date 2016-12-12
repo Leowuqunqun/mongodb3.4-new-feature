@@ -1,42 +1,56 @@
 # mongoDb 3.4 New Features
 
-## 目录
+<!-- toc -->
+- [官方视频教程](#%E5%AE%98%E6%96%B9%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B)
+  * [官方视频教程](#%E5%AE%98%E6%96%B9%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B-1)
+- [Read-only Views](#read-only-views)
+  * [Commands](#commands)
+  * [Example](#example)
+  * [Note](#note)
+- [Improved BI Connector](#improved-bi-connector)
+- [LDAP Authorization](#ldap-authorization)
+- [Log Redaction企业版功能](#log-redaction%E4%BC%81%E4%B8%9A%E7%89%88%E5%8A%9F%E8%83%BD)
+- [Faster Balancing](#faster-balancing)
+- [graphLookup](#graphlookup)
+  * [Basic Commands](#basic-commands)
+  * [Examples](#examples)
+    + [Example 1 查询所有母任务](#example-1-%E6%9F%A5%E8%AF%A2%E6%89%80%E6%9C%89%E6%AF%8D%E4%BB%BB%E5%8A%A1)
+      - [总结](#%E6%80%BB%E7%BB%93)
+    + [Example 2 查询项目同时查询项目对应任务列表](#example-2-%E6%9F%A5%E8%AF%A2%E9%A1%B9%E7%9B%AE%E5%90%8C%E6%97%B6%E6%9F%A5%E8%AF%A2%E9%A1%B9%E7%9B%AE%E5%AF%B9%E5%BA%94%E4%BB%BB%E5%8A%A1%E5%88%97%E8%A1%A8)
+      - [总结](#%E6%80%BB%E7%BB%93-1)
+- [Decimal Support](#decimal-support)
+- [Robust Initial Sync](#robust-initial-sync)
+- [Collations](#collations)
+- [Ops Manager](#ops-manager)
+- [Zone Sharding](#zone-sharding)
+- [Compass](#compass)
+- [New Aggregation Operators](#new-aggregation-operators)
+- [Facets](#facets)
+- [Spark Connector V2](#spark-connector-v2)
+- [Upgrade and Downgrade Process](#upgrade-and-downgrade-process)
+- [Installation-windows](#installation-windows)
 
-* [官方视频教程](https://university.mongodb.com/courses/MongoDB/M034/2016_November/syllabus)
-* [Read-only Views](#Read-only-Views)
-* [Improved BI Connector](#Improved-BI-Connector)
-* [LDAP Authorization企业版功能](https://docs.mongodb.com/manual/release-notes/3.4/#ldap-enhancements)
-* [Log Redaction企业版功能](https://docs.mongodb.com/manual/release-notes/3.4/#log-redaction)
-* [Faster Balancing](https://docs.mongodb.com/manual/release-notes/3.4/#faster-balancing)
-* [$graphLookup](#graphLookup)
-* Decimal Support
-* Robust Initial Sync
-* Collations
-* Ops Manager
-* Zone Sharding
-* Compass
-* New Aggregation Operators
-* Facets
-* Spark Connector V2
-* Upgrade and Downgrade Process
-* [Installation Windows](#Installation-windows)
+<!-- tocstop -->
 
+## 官方视频教程
+
+### [官方视频教程](https://university.mongodb.com/courses/MongoDB/M034/2016_November/syllabus)
 
 ## Read-only Views
 
 [文档](https://app.yinxiang.com/shard/s31/nl/5720837/cd26907a-946b-403a-8a36-6a07ae5f26c4)
 
-* Commands
+### Commands
 
 ```bash
     db.runCommand( { create: <view>, viewOn: <source>, pipeline: <pipeline> } )
-    # or
+   
     db.createView(<view>, <source>, <pipeline>, <collation> )
 ```
 
-* Example
+### Example
 
-```bash
+```javascript
     use raven
 
     db.runCommand({
@@ -72,7 +86,7 @@
     db.top_folder_pid.drop();
 ```
 
-* Note
+### Note
 
 1. 视图为只读, 在视图上写操作会出错
 
@@ -99,9 +113,16 @@
 
 
 ## Improved BI Connector
+> [视频教程](https://university.mongodb.com/courses/MongoDB/M034/2016_November/courseware/Chapter_2_Improved_BI_Connector/57ec1d6816f46429ae8ef37d)
 
-[教程](https://university.mongodb.com/courses/MongoDB/M034/2016_November/courseware/Chapter_2_Improved_BI_Connector/57ec1d6816f46429ae8ef37d)
+## LDAP Authorization
+> 企业版功能 [LDAP Authorization](https://docs.mongodb.com/manual/release-notes/3.4/#ldap-enhancements)
 
+## Log Redaction企业版功能
+> [Log Redaction企业版功能](https://docs.mongodb.com/manual/release-notes/3.4/#log-redaction)
+
+## Faster Balancing
+> [Faster Balancing](https://docs.mongodb.com/manual/release-notes/3.4/#faster-balancing)
 
 ## graphLookup
 
@@ -177,7 +198,25 @@
 * 性能下降, 一对多简单关联的时候不适合使用
 
 
+## Decimal Support
 
+## Robust Initial Sync
+
+## Collations
+
+## Ops Manager
+
+## Zone Sharding
+
+## Compass
+
+## New Aggregation Operators
+
+## Facets
+
+## Spark Connector V2
+
+## Upgrade and Downgrade Process
 
 ## Installation-windows
 

@@ -32,7 +32,7 @@
 
 <!-- tocstop -->
 
-## 官方视频教程
+## 教程
 
 ### [官方视频教程](https://university.mongodb.com/courses/MongoDB/M034/2016_November/syllabus)
 
@@ -128,7 +128,7 @@
 
 ### Basic Commands
 
-```json
+```javascript
     {
         $graphLookup: {
             from: <collection>,
@@ -196,6 +196,8 @@
 ##### 总结
 
 * 性能下降, 一对多简单关联的时候不适合使用
+
+
 
 
 ## Decimal Support

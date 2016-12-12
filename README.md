@@ -38,8 +38,6 @@
 
 ## Read-only Views
 
-[文档](https://app.yinxiang.com/shard/s31/nl/5720837/cd26907a-946b-403a-8a36-6a07ae5f26c4)
-
 ### Commands
 
 ```bash

@@ -164,13 +164,33 @@
     ]);
 ```
 
-##### 总结
-
-* 性能差,不适合树形查询
-
-#### Example 2 查询项目同时查询项目对应任务列表
+#### Example 2 查询所有子任务
 
 ```bash
+    db.task.aggregate([
+        {
+            $match: {
+                TaskID: "31ea3d22-7353-4ac0-9520-47779627d631"
+            }
+        },
+        {
+            $graphLookup: {
+                from: "task",
+                startWith: "$TaskID",
+                connectFromField: "TaskID",
+                connectToField: "ParentID",
+                as: "SubTasks"
+            }
+        }
+    ]);
+
+```
+
+
+#### Example 3 查询项目同时查询项目对应任务列表
+
+```bash
+    //graphLookup
     db.folder.aggregate([
         {
             $match: {
@@ -188,31 +208,133 @@
                 as: "Tasks"
             }
         }
-    ])
+    ]);
+
+    //lookup
+    db.folder.aggregate([
+        {
+            $match: {
+                FolderID: "96367dcc-6c41-4eb3-b391-905c907e9840"
+            }
+        },
+        {
+            $lookup: {
+                from:"task",
+                localField:"FolderID",
+                foreignField:"FolderID",
+                as:"Tasks"
+            }
+        }
+    ]);
 ```
 
-##### 总结
+#### Example 4 官方Demo
 
-* 性能下降, 一对多简单关联的时候不适合使用
+1. [Examples](https://docs.mongodb.com/manual/reference/operator/aggregation/graphLookup/#examples)
 
+#### graphLookUp 注意点
 
+1. 在*from*里指定的collection不可以是sharded;
 
+1. 设置maxDepth 参数为0, 等效于 [$lookup](https://docs.mongodb.com/manual/reference/operator/aggregation/lookup/#pipe._S_lookup) 查询(不递归)
+
+1. 在使用 $graphlookup 时需要注意到 [aggregration pipeline的限制](https://docs.mongodb.com/manual/core/aggregation-pipeline-limits/) , 包括 [内存限制](https://docs.mongodb.com/manual/core/aggregation-pipeline-limits/#agg-memory-restrictions)
+
+1. $graphlookup 不能像其他聚合操作一样把硬盘空间当做内存来使用, 所以你必须接受100M 内存限制
 
 ## Decimal Support
 
+```bash
+    //shell Example
+    db.inventory.insert( {_id: 1, item: "The Scream", price: NumberDecimal("9.99"), quantity: 4 } )
+```
+
+> Unlike the double data type, which only stores an approximation of the decimal values, the decimal data type stores the exact value. For example, a decimal NumberDecimal("9.99") has a precise value of 9.99 where as a double 9.99 would have an approximate value of 9.9900000000000002131628....
+
+> 翻译: 数值:0.99  double类型真实存储的值近似9.9900000000000002131628...., Decimal类型存储0.99
+
+
 ## Robust Initial Sync
+
+* 优化了副本集初始同步的性能
+
+* 初始化同步重试逻辑更佳可靠
+
+* 可以用 *rs.status()* 查看初始同步状态和进度
 
 ## Collations
 
+
+
 ## Ops Manager
+
+### [官方文档](https://docs.opsmanager.mongodb.com/current/application/#mms-overview)
 
 ## Zone Sharding
 
 ## Compass
 
+### [下载链接](https://www.mongodb.com/downloads?jmp=docs&_ga=1.111399943.2031717362.1470108291#compass)
+
 ## New Aggregation Operators
 
 ## Facets
+
+### 基本概念
+
+> 在一个阶段中以相同的输入并行执行多个聚合操作
+> 在$facet操作中不能使用以下操作符: *$facet*,*$out*,*$geoNear*,*$indexStats*,*$collStats*
+
+### Example
+
+```javascript
+    use taskcenter
+    db.task.aggregate([
+        {
+            $match: { FolderID: "68878ce2-b5a7-4989-8db1-6f1e9025e37a" }
+        },
+        {
+            $facet: {
+                "MembersJoinTaskCount": [
+                    { $unwind: "$Members" },
+                    { $match:{"Members.Type":0}},
+                    { $sortByCount: "$Members.AccountID" }
+                ],
+                "ChargeUserTaskCount":[
+                    {$sortByCount:"$ChargeAccountID"}
+                ],
+                "Deadlines":[
+                    {$group:{_id:"$Deadline",count:{$sum:1}}}
+                ],
+                "DeadlineTasksBucketByDate":[
+                    {$bucket:{
+                        groupBy:"$Deadline",
+                        boundaries:[new Date('2015-1-1'),new Date('2015-6-1'),new Date('2016-6-1')],
+                        default:"Other",
+                        output:{
+                            "count":{$sum:1},
+                            "charges":{$push:"$ChargeAccountID"}
+                        }
+                    }}
+                ],
+                "DeadlineTasksBucketByDate(Auto)":[
+                    {
+                        $bucketAuto:{
+                            groupBy:"$Deadline",
+                            buckets:10
+                        }
+                    }
+                ]
+            }
+        }
+    ]);
+```
+
+
+## Linearizable Read Concern
+
+### [Linearizable](https://docs.mongodb.com/manual/reference/read-concern/#readconcern.)
+
 
 ## Spark Connector V2
 

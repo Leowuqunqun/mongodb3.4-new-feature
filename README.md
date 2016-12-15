@@ -351,7 +351,7 @@
 
 ## Installation-windows
 
-```javascript
+```bash
     mongod
         --dbpath=D:\mongodb3.4
         --logpath=D:\mongodb3.4\log.txt

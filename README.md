@@ -306,6 +306,7 @@
 ### 基本概念
 
 > 在一个阶段中以相同的输入并行执行多个聚合操作
+
 > 在$facet操作中不能使用以下操作符: *$facet*,*$out*,*$geoNear*,*$indexStats*,*$collStats*
 
 ### Example

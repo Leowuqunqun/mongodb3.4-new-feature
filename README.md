@@ -23,6 +23,8 @@
 - [Decimal Support](#decimal-support)
 - [Robust Initial Sync](#robust-initial-sync)
 - [Collations](#collations)
+  * [支持各种语言方案的排序(貌似没有什么卵用)](#%E6%94%AF%E6%8C%81%E5%90%84%E7%A7%8D%E8%AF%AD%E8%A8%80%E6%96%B9%E6%A1%88%E7%9A%84%E6%8E%92%E5%BA%8F%E8%B2%8C%E4%BC%BC%E6%B2%A1%E6%9C%89%E4%BB%80%E4%B9%88%E5%8D%B5%E7%94%A8)
+  * [Example](#example-1)
 - [Ops Manager](#ops-manager)
   * [官方文档](#%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3)
 - [Zone Sharding](#zone-sharding)
@@ -31,7 +33,7 @@
 - [New Aggregation Operators](#new-aggregation-operators)
 - [Facets](#facets)
   * [基本概念](#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5)
-  * [Example](#example-1)
+  * [Example](#example-2)
 - [Linearizable Read Concern](#linearizable-read-concern)
   * [Linearizable](#linearizable)
 - [Spark Connector V2](#spark-connector-v2)
@@ -273,6 +275,18 @@
 
 ## Collations
 
+### 支持各种语言方案的排序(貌似没有什么卵用)
+
+### Example
+
+```javascript
+    use collationTest
+    db.createCollection("china",{collation:{locale:"zh"}});
+    db.createCollection("eng");
+```
+
+![Output Zh](https://dn-mdmedia.qbox.me/f56d42b3-a75a-4eb0-885f-8b7a738581b9/2016/11/15/ede05b9b-a908-95cf-b065-45d9f2a237d2.png)
+![Output en](https://dn-mdmedia.qbox.me/f56d42b3-a75a-4eb0-885f-8b7a738581b9/2016/11/15/4bfdb66e-b49a-753d-7ebe-078486e29d46.png)
 
 
 ## Ops Manager

@@ -1,8 +1,9 @@
 # mongoDb 3.4 New Features
 
 <!-- toc -->
-- [官方视频教程](#%E5%AE%98%E6%96%B9%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B)
-  * [官方视频教程](#%E5%AE%98%E6%96%B9%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B-1)
+
+- [教程](#%E6%95%99%E7%A8%8B)
+  * [官方视频教程](#%E5%AE%98%E6%96%B9%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B)
 - [Read-only Views](#read-only-views)
   * [Commands](#commands)
   * [Example](#example)
@@ -15,20 +16,28 @@
   * [Basic Commands](#basic-commands)
   * [Examples](#examples)
     + [Example 1 查询所有母任务](#example-1-%E6%9F%A5%E8%AF%A2%E6%89%80%E6%9C%89%E6%AF%8D%E4%BB%BB%E5%8A%A1)
-      - [总结](#%E6%80%BB%E7%BB%93)
-    + [Example 2 查询项目同时查询项目对应任务列表](#example-2-%E6%9F%A5%E8%AF%A2%E9%A1%B9%E7%9B%AE%E5%90%8C%E6%97%B6%E6%9F%A5%E8%AF%A2%E9%A1%B9%E7%9B%AE%E5%AF%B9%E5%BA%94%E4%BB%BB%E5%8A%A1%E5%88%97%E8%A1%A8)
-      - [总结](#%E6%80%BB%E7%BB%93-1)
+    + [Example 2 查询所有子任务](#example-2-%E6%9F%A5%E8%AF%A2%E6%89%80%E6%9C%89%E5%AD%90%E4%BB%BB%E5%8A%A1)
+    + [Example 3 查询项目同时查询项目对应任务列表](#example-3-%E6%9F%A5%E8%AF%A2%E9%A1%B9%E7%9B%AE%E5%90%8C%E6%97%B6%E6%9F%A5%E8%AF%A2%E9%A1%B9%E7%9B%AE%E5%AF%B9%E5%BA%94%E4%BB%BB%E5%8A%A1%E5%88%97%E8%A1%A8)
+    + [Example 4 官方Demo](#example-4-%E5%AE%98%E6%96%B9demo)
+    + [graphLookUp 注意点](#graphlookup-%E6%B3%A8%E6%84%8F%E7%82%B9)
 - [Decimal Support](#decimal-support)
 - [Robust Initial Sync](#robust-initial-sync)
 - [Collations](#collations)
 - [Ops Manager](#ops-manager)
+  * [官方文档](#%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3)
 - [Zone Sharding](#zone-sharding)
 - [Compass](#compass)
+  * [下载链接](#%E4%B8%8B%E8%BD%BD%E9%93%BE%E6%8E%A5)
 - [New Aggregation Operators](#new-aggregation-operators)
 - [Facets](#facets)
+  * [基本概念](#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5)
+  * [Example](#example-1)
+- [Linearizable Read Concern](#linearizable-read-concern)
+  * [Linearizable](#linearizable)
 - [Spark Connector V2](#spark-connector-v2)
 - [Upgrade and Downgrade Process](#upgrade-and-downgrade-process)
 - [Installation-windows](#installation-windows)
+
 
 <!-- tocstop -->
 
@@ -145,7 +154,7 @@
 
 #### Example 1 查询所有母任务
 
-```bash
+```javascript
     db.task.aggregate([
         {
             $match: {
@@ -166,7 +175,7 @@
 
 #### Example 2 查询所有子任务
 
-```bash
+```javascript
     db.task.aggregate([
         {
             $match: {
@@ -189,7 +198,7 @@
 
 #### Example 3 查询项目同时查询项目对应任务列表
 
-```bash
+```javascript
     //graphLookup
     db.folder.aggregate([
         {
@@ -244,7 +253,7 @@
 
 ## Decimal Support
 
-```bash
+```javascript
     //shell Example
     db.inventory.insert( {_id: 1, item: "The Scream", price: NumberDecimal("9.99"), quantity: 4 } )
 ```
@@ -342,7 +351,7 @@
 
 ## Installation-windows
 
-```bash
+```javascript
     mongod
         --dbpath=D:\mongodb3.4
         --logpath=D:\mongodb3.4\log.txt

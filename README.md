@@ -295,6 +295,12 @@
 
 ## Zone Sharding
 
+### Some common deployment patterns where zones can be applied are as follows:
+
+>* Isolate a specific subset of data on a specific set of shards.
+>* Ensure that the most relevant data reside on shards that are geographically closest to the application servers.
+>* Route data to shards based on the hardware / performance of the shard hardware.
+
 ## Compass
 
 ### [下载链接](https://www.mongodb.com/downloads?jmp=docs&_ga=1.111399943.2031717362.1470108291#compass)
